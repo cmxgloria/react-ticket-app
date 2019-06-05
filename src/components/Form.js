@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Form = () => (
-  <form>
-    <input type="text" />
+const Form = props => (
+  <form onSubmit={props.getTicket}>
+    <input type="text" name="ticketName" />
     <button>Search</button>
   </form>
 );
