@@ -6,6 +6,18 @@ class App extends React.Component {
   state = {
     tickets: []
   }
+  componentDidMount = async () => {
+    const api_call = await fetch('https://cors-anywhere.herokuapp.com/https://meixiao.zendesk.com/api/v2/tickets.json?per_page=25',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic Y214Z2xvcmlhQGdtYWlsLmNvbTp6ZEA2MTgwNzY2'
+        }
+      });
+    const data = await api_call.json();
+    console.log(data);
+  }
   render() {
     return (
       <div className="App">
