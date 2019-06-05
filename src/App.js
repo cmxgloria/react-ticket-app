@@ -1,9 +1,5 @@
 import React from 'react';
-import Logo from './logo.svg';
 import './App.css';
-import Form from './components/Form';
-
-const API_KEY = "Mg4az0ZzAuOxCtkwaCXW4iXbKNFOnt5BpdKsHzCR";
 
 class App extends React.Component {
   getTicket = async (e) => {
@@ -19,19 +15,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={Logo} className="App-logo" alt="logo" />
-          <logo />;
-          <Form getTicket={this.getTicket} />;
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          <img src="https://d1eipm3vz40hy0.cloudfront.net/images/p-omnichannel/logo-suite-z.svg" alt="logo" />
           <a
-            className="App-link"
-            href="https://reactjs.org"
+            href="https://www.zendesk.com/"
             target="_blank"
-            rel="noopener noreferrer"
           >
-            Zendesk Ticket Viewer
+            Zendesk
           </a>
         </header>
       </div>
