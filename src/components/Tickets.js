@@ -12,11 +12,13 @@ const Tickets = props => (
                 <h5>{ticket.status}</h5>
                 <div key={ticket.requester_id}>
                   <p>Created At: {new Date(ticket.created_at).toDateString()}</p>
-                  <p>{ticket.description}</p>
+                  <p>Description: <span>{ticket.description}</span></p>
                 </div>
               </div>
             </div>
-            <button></button>
+            <button className="Ticket-button">
+              <a href={ticket.url}>View Ticket</a>
+            </button>
           </div>);
       })}
     </div>
