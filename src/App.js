@@ -17,6 +17,7 @@ class App extends React.Component {
       });
     const data = await api_call.json();
     console.log(data);
+    this.setState({tickets: data.tickets});
   }
   render() {
     return (
