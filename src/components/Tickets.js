@@ -19,8 +19,7 @@ const Tickets = props => (
             </div>
             <button className="Ticket-button">
               <Link to={{
-                pathname: `/ticket/${ticket.id}`,
-                state: { url: ticket.url }
+                pathname: `/ticket/${ticket.id}`
               }}>
                 View Ticket
               </Link>

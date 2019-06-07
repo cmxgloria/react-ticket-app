@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Ticket extends React.Component {
   state = {
-    ticket: []
+    ticket: null
   }
   componentDidMount = async () => {
-    const url = this.props.location.state.url
-    const request = await fetch(`https://cors-anywhere.herokuapp.com/${url}`,
+    const ticketId = this.props.match.params.id;
+    const request = await fetch(`https://cors-anywhere.herokuapp.com/https://meixiao.zendesk.com/api/v2/tickets/${ticketId}.json`,
       {
         method: 'GET',
         headers: {
@@ -15,12 +16,23 @@ class Ticket extends React.Component {
         }
       });
     const result = await request.json();
-    console.log(result);
     this.setState({ ticket: result.ticket })
+    console.log(result.ticket);
   }
   render() {
+    const ticket = this.state.ticket;
     return (
-      <div>{this.state.ticket.subject}</div>
+      <div className="container">
+        {
+          ticket &&
+          <div className="active-ticket">
+            <h3 className="active-ticket__subject">Subject:{ticket.subject}</h3>
+            <h4 className="active-ticket__description">Description:{ticket.description}</h4>
+            <p className="active-ticket__website">Website:<span><a href={ticket.url}>{ticket.url}</a></span></p>
+            <button className="active-recipe__button"><Link to="/">Go Home</Link></button>
+          </div>
+        }
+      </div>
     );
   }
 };
