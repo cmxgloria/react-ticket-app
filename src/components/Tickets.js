@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Tickets = props => (
   <div className="Container">
@@ -17,7 +18,12 @@ const Tickets = props => (
               </div>
             </div>
             <button className="Ticket-button">
-              <a href={ticket.url}>View Ticket</a>
+              <Link to={{
+                pathname: `/ticket/${ticket.id}`,
+                state: { url: ticket.url }
+              }}>
+                View Ticket
+              </Link>
             </button>
           </div>);
       })}
