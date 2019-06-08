@@ -8,13 +8,15 @@ class Tickets extends React.Component {
     nextPage: null,
     previousPage: null,
     loading: false,
-    total: 0
+    total: 0,
+    error: null
   }
   apiCall = async (ticksUrl) => {
     this.setState({
       loading: true
     });
-    const api_call = await fetch(`https://cors-anywhere.herokuapp.com/${ticksUrl}`,
+    try {
+      const api_call = await fetch(`https://cors-anywhere.herokuapp.com/${ticksUrl}`,
       {
         method: 'GET',
         headers: {
@@ -31,6 +33,10 @@ class Tickets extends React.Component {
       total: data.count,
       loading: false
     });
+    } catch (error){
+      console.log(error);
+      this.setState({error: true})
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     console.log(prevProps, prevState);
@@ -40,6 +46,9 @@ class Tickets extends React.Component {
   }
 
   render() {
+    if(this.state.error){
+      return <div>Sorry,API error!</div>
+    }
     if (this.state.loading) {
       return <div>loading ...</div>
     }
