@@ -2,12 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
   background-color: #8d9fb1;
   min-height: 90px;
@@ -18,15 +12,17 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+body {
+  background: #dadfe4;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Ticket-container {
+  padding: 20px 20px;
+  margin: 20px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  border-radius: 4px;
+}
+.Tickets-total {
+  margin: 10px;
 }

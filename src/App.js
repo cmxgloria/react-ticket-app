@@ -9,6 +9,7 @@ class App extends React.Component {
     nextPage: null,
     previousPage: null,
     loading: false,
+    total: 0
   }
   apiCall = async (ticksUrl) => {
     this.setState({
@@ -28,6 +29,7 @@ class App extends React.Component {
       tickets: data.tickets,
       nextPage: data.next_page,
       previousPage: data.previous_page,
+      total: data.count,
       loading: false
     });
   }
@@ -51,7 +53,7 @@ class App extends React.Component {
             <img src="https://d1eipm3vz40hy0.cloudfront.net/images/p-omnichannel/logo-suite-z.svg" alt="logo" />
           </a>
         </header>
-        <Tickets tickets={this.state.tickets} />
+        <Tickets tickets={this.state.tickets} total={this.state.total} />
         {this.state.previousPage && <button onClick={(e) => this.apiCall(this.state.previousPage)}>prev</button>}
         {this.state.nextPage && <button onClick={(e) => this.apiCall(this.state.nextPage)}>next</button>}
         {this.state.nextPage && <button><Link to={{ pathname: '/?page=2', query: { page: 2 } }}>next</Link></button>}
