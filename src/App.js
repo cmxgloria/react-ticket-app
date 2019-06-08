@@ -10,7 +10,9 @@ const App = () => {
           <img src="https://d1eipm3vz40hy0.cloudfront.net/images/p-omnichannel/logo-suite-z.svg" alt="logo" />
         </a>
       </header>
-      <Router />
+      <div className="App-content">
+        <Router />
+      </div>
     </div>
   );
 }

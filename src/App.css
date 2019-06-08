@@ -17,12 +17,15 @@ body {
 }
 
 .Ticket-container {
-  padding: 20px 20px;
-  margin: 20px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.12);
   background: #fff;
   border-radius: 4px;
+  padding: 20px 20px;
+  margin: 20px 0;
 }
 .Tickets-total {
   margin: 10px;
+}
+.App-content {
+  margin: 20px 20px;
 }
