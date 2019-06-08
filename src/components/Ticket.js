@@ -28,7 +28,6 @@ class Ticket extends React.Component {
           <div className="active-ticket">
             <h3 className="active-ticket__subject">Subject:{ticket.subject}</h3>
             <h4 className="active-ticket__description">Description:{ticket.description}</h4>
-            <p className="active-ticket__website">Website:<span><a href={ticket.url}>{ticket.url}</a></span></p>
             <button className="active-recipe__button"><Link to="/">Go Home</Link></button>
           </div>
         }
