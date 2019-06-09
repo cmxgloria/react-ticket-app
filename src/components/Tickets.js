@@ -25,17 +25,20 @@ class Tickets extends React.Component {
           }
         });
       const data = await api_call.json();
-      console.log(data);
-      this.setState({
-        tickets: data.tickets,
-        nextPage: data.next_page,
-        previousPage: data.previous_page,
-        total: data.count,
-        loading: false
-      });
+      if (api_call.ok) {
+        this.setState({
+          tickets: data.tickets,
+          nextPage: data.next_page,
+          previousPage: data.previous_page,
+          total: data.count,
+          loading: false
+        })
+      } else {
+        this.setState({ error: data.error, loading: false })
+      }
     } catch (error) {
       console.log(error);
-      this.setState({ error: true })
+      this.setState({ error: error.message, loading: false })
     }
   }
   componentDidUpdate(prevProps, prevState) {
@@ -47,7 +50,10 @@ class Tickets extends React.Component {
 
   render() {
     if (this.state.error) {
-      return <div>Sorry,API error!</div>
+      return <div>
+        <div>Oh noes, something went wrong!</div>
+        <div>{this.state.error}</div>
+      </div>
     }
     if (this.state.loading) {
       return <div>loading ...</div>
@@ -83,4 +89,5 @@ class Tickets extends React.Component {
     )
   }
 }
+
 export default Tickets;

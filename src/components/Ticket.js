@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 class Ticket extends React.Component {
   state = {
     ticket: null,
-    error: null
+    error: null,
+    loading: false
   }
   componentDidMount = async () => {
+    this.setState({ loading: true });
     const ticketId = this.props.match.params.id;
     try {
-      const request = await fetch(`https://cors-anywhere.herokuapp.com/https://meixiao.zendesk.com/api/v2/tickets/${ticketId}.json`,
+      const response = await fetch(`https://cors-anywhere.herokuapp.com/https://meixiao.zendesk.com/api/v2/tickets/${ticketId}.json`,
         {
           method: 'GET',
           headers: {
@@ -17,16 +19,29 @@ class Ticket extends React.Component {
             'Authorization': 'Basic Y214Z2xvcmlhQGdtYWlsLmNvbTp6ZEA2MTgwNzY2'
           }
         });
-      const result = await request.json();
-      this.setState({ ticket: result.ticket })
+      const result = await response.json();
+      if (response.ok) {
+        this.setState({ ticket: result.ticket, loading: false })
+      } else {
+        this.setState({ error: result.error, loading: false })
+      }
+
     } catch (error) {
       console.log(error);
-      this.setState({ error: true })
+      this.setState({ error: error.message, loading: false })
     }
   }
   render() {
     if (this.state.error) {
-      return <div>Sorry, API Error!</div>
+      return (
+        <div>
+          <div>Oh noes, something went wrong!</div>
+          <div>{this.state.error}</div>
+        </div>
+      )
+    }
+    if (this.state.loading) {
+      return <div>loading...</div>
     }
     const ticket = this.state.ticket;
     return (
