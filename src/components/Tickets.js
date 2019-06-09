@@ -17,25 +17,25 @@ class Tickets extends React.Component {
     });
     try {
       const api_call = await fetch(`https://cors-anywhere.herokuapp.com/${ticksUrl}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic Y214Z2xvcmlhQGdtYWlsLmNvbTp6ZEA2MTgwNzY2'
-        }
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic Y214Z2xvcmlhQGdtYWlsLmNvbTp6ZEA2MTgwNzY2'
+          }
+        });
+      const data = await api_call.json();
+      console.log(data);
+      this.setState({
+        tickets: data.tickets,
+        nextPage: data.next_page,
+        previousPage: data.previous_page,
+        total: data.count,
+        loading: false
       });
-    const data = await api_call.json();
-    console.log(data);
-    this.setState({
-      tickets: data.tickets,
-      nextPage: data.next_page,
-      previousPage: data.previous_page,
-      total: data.count,
-      loading: false
-    });
-    } catch (error){
+    } catch (error) {
       console.log(error);
-      this.setState({error: true})
+      this.setState({ error: true })
     }
   }
   componentDidUpdate(prevProps, prevState) {
@@ -46,16 +46,17 @@ class Tickets extends React.Component {
   }
 
   render() {
-    if(this.state.error){
+    if (this.state.error) {
       return <div>Sorry,API error!</div>
     }
     if (this.state.loading) {
       return <div>loading ...</div>
     }
+    const { tickets, previousPage, nextPage, total } = this.state;
     return (
       <div className="Container">
-        <div className="Tickets-total">Total tickets: {this.state.total}</div>
-        {this.state.tickets.map((ticket) => {
+        <div className="Tickets-total">{total} total tickets, {tickets.length} on this page</div>
+        {tickets.map((ticket) => {
           return (
             <div key={ticket.subject} className="Ticket-container">
               <div className="Ticket-text">
@@ -75,9 +76,9 @@ class Tickets extends React.Component {
               </button>
             </div>);
         })}
-        {this.state.previousPage && <button onClick={(e) => this.apiCall(this.state.previousPage)}>prev</button>}
-        {this.state.nextPage && <button onClick={(e) => this.apiCall(this.state.nextPage)}>next</button>}
-        {this.state.nextPage && <button><Link to={{ pathname: '/?page=2', query: { page: 2 } }}>next</Link></button>}
+        {previousPage && <button onClick={(e) => this.apiCall(previousPage)}>prev</button>}
+        {nextPage && <button onClick={(e) => this.apiCall(nextPage)}>next</button>}
+        {nextPage && <button><Link to={{ pathname: '/?page=2', query: { page: 2 } }}>next</Link></button>}
       </div>
     )
   }
