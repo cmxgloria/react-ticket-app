@@ -40,9 +40,7 @@ class Tickets extends React.Component {
       this.setState({ error: error.message, loading: false })
     }
   }
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, prevState);
-  }
+
   componentDidMount = async () => {
     await this.apiCall('https://meixiao.zendesk.com/api/v2/tickets.json?per_page=25&page=1');
   }
