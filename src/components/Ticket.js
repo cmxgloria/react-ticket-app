@@ -45,17 +45,17 @@ class Ticket extends React.Component {
     }
     const ticket = this.state.ticket;
     return (
-      <div className="Ticket-container">
+      <div>
         {
           ticket &&
-          <div className="active-ticket">
-            <h3 className="active-ticket__subject">Subject:{ticket.subject}</h3>
+          <div>
+            <h3>Subject:{ticket.subject}</h3>
             <p>Created At: {new Date(ticket.created_at).toDateString()}</p>
             <p>Updated At: {new Date(ticket.updated_at).toDateString()}</p>
             <p>Priority: {ticket.priority}</p>
             <p>Status: {ticket.status}</p>
-            <p className="active-ticket__description">{ticket.description}</p>
-            <button className="active-recipe__button"><Link to="/">Go Home</Link></button>
+            <p>{ticket.description}</p>
+            <button className="button"><Link className="link" to="/">Go Home</Link></button>
           </div>
         }
       </div>
