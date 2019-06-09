@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 class Tickets extends React.Component {
   state = {
     tickets: [],
@@ -50,10 +49,12 @@ class Tickets extends React.Component {
 
   render() {
     if (this.state.error) {
-      return <div>
-        <div>Oh noes, something went wrong!</div>
-        <div>{this.state.error}</div>
-      </div>
+      return (
+        <div>
+          <div>Oh noes, something went wrong!</div>
+          <div>{this.state.error}</div>
+        </div>
+      )
     }
     if (this.state.loading) {
       return <div>loading ...</div>
@@ -73,8 +74,8 @@ class Tickets extends React.Component {
                   {/* <p>Description: <span>{ticket.description}</span></p> */}
                 </div>
               </div>
-              <button className="Ticket-button">
-                <Link to={{
+              <button className="button">
+                <Link className="link" to={{
                   pathname: `/ticket/${ticket.id}`
                 }}>
                   View Ticket
@@ -82,9 +83,8 @@ class Tickets extends React.Component {
               </button>
             </div>);
         })}
-        {previousPage && <button onClick={(e) => this.apiCall(previousPage)}>prev</button>}
-        {nextPage && <button onClick={(e) => this.apiCall(nextPage)}>next</button>}
-        {nextPage && <button><Link to={{ pathname: '/?page=2', query: { page: 2 } }}>next</Link></button>}
+        {previousPage && <button className="pagination button" onClick={(e) => this.apiCall(previousPage)}>prev</button>}
+        {nextPage && <button className="pagination button" onClick={(e) => this.apiCall(nextPage)}>next</button>}
       </div>
     )
   }
