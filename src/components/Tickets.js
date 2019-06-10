@@ -2,20 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Tickets extends React.Component {
+  // default state
   state = {
     tickets: [],
     nextPage: null,
     previousPage: null,
     loading: false,
     total: 0,
-    error: null
+    error: null,
+    page: null
   }
-  apiCall = async (ticksUrl) => {
+  apiCall = async (ticketsUrl) => {
+    // start loading before fetch
     this.setState({
       loading: true
     });
     try {
-      const api_call = await fetch(`https://cors-anywhere.herokuapp.com/${ticksUrl}`,
+      const api_call = await fetch(`https://cors-anywhere.herokuapp.com/${ticketsUrl}`,
         {
           method: 'GET',
           headers: {
@@ -24,25 +27,28 @@ class Tickets extends React.Component {
           }
         });
       const data = await api_call.json();
+      // if api_call is ok
       if (api_call.ok) {
         this.setState({
           tickets: data.tickets,
           nextPage: data.next_page,
           previousPage: data.previous_page,
           total: data.count,
-          loading: false
+          loading: false,
+          page: ticketsUrl.replace('https://meixiao.zendesk.com/api/v2/tickets.json?', '')
         })
-      } else {
+      } else { // if api returns error
         this.setState({ error: data.error, loading: false })
       }
-    } catch (error) {
+    } catch (error) { // any error
       console.log(error);
       this.setState({ error: error.message, loading: false })
     }
   }
 
   componentDidMount = async () => {
-    await this.apiCall('https://meixiao.zendesk.com/api/v2/tickets.json?per_page=25&page=1');
+    // first time renders page 1
+    await this.apiCall('https://meixiao.zendesk.com/api/v2/tickets.json?page=1&per_page=25');
   }
 
   render() {
@@ -57,10 +63,12 @@ class Tickets extends React.Component {
     if (this.state.loading) {
       return <div>loading ...</div>
     }
-    const { tickets, previousPage, nextPage, total } = this.state;
+
+    const { tickets, previousPage, nextPage, total, page } = this.state;
     return (
       <div className="Container">
-        <div className="Tickets-total">{total} total tickets, {tickets.length} on this page</div>
+        <div className="Tickets-total">{total} total tickets, {tickets.length} on this page, {page}</div>
+        {/* loop through tickets */}
         {tickets.map((ticket) => {
           return (
             <div key={ticket.subject} className="Ticket-container">
@@ -69,7 +77,6 @@ class Tickets extends React.Component {
                 <span>status: {ticket.status}</span>
                 <div key={ticket.requester_id}>
                   <p>Created At: {new Date(ticket.created_at).toDateString()}</p>
-                  {/* <p>Description: <span>{ticket.description}</span></p> */}
                 </div>
               </div>
               <button className="button">
