@@ -71,11 +71,11 @@ class Tickets extends React.Component {
         {/* loop through tickets */}
         {tickets.map((ticket) => {
           return (
-            <div key={ticket.subject} className="Ticket-container">
+            <div key={ticket.id} className="Ticket-container">
               <div className="Ticket-text">
                 <h4>{ticket.subject}</h4>
                 <span>status: {ticket.status}</span>
-                <div key={ticket.requester_id}>
+                <div>
                   <p>Created At: {new Date(ticket.created_at).toDateString()}</p>
                 </div>
               </div>
