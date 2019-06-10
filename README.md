@@ -4,6 +4,20 @@ This app utilises https://cors-anywhere.herokuapp.com to enables cross-origin re
 
 This project was powered by react, react-router and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## Installation
+
+1. git clone this branch
+2. `cd reat-ticket-app`
+3. `npm install`
+
+## Usage
+Runs the app in the development mode
+
+  ```shell
+  npm start
+  ```
+
 ## Available Scripts
 
 In the project directory, you can run:
