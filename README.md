@@ -7,7 +7,7 @@ This project was powered by react, react-router and was bootstrapped with [Creat
 
 ## Installation
 
-1. git clone this branch
+1. git clone this branch git@github.com:cmxgloria/react-ticket-app.git
 2. `cd react-ticket-app`
 3. `npm install`
 
