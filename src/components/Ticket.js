@@ -11,6 +11,7 @@ class Ticket extends React.Component {
   componentDidMount = async () => {
     this.setState({ loading: true });
     // get ticketId from Router (path='/ticket/:id')
+    //React router pass props (history, match and location) to ticket component
     const ticketId = this.props.match.params.id;
     // start fetching
     try {
