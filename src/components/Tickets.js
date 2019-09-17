@@ -27,7 +27,7 @@ class Tickets extends React.Component {
           }
         });
       const data = await api_call.json();
-      // if api_call is ok
+      // handle API error, if api_call is ok
       if (api_call.ok) {
         this.setState({
           tickets: data.tickets,
